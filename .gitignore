@@ -4,3 +4,4 @@ media
 # Python
 __pycache__
 venv
+*TEMP.py
