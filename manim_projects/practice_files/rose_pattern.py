@@ -19,11 +19,9 @@ class RosePattern(VMobject):
         step_size = 0.05
         theta = np.arange(0, TAU + step_size, step_size)
         pts = [
-            [
-                radius * cos(k * t) * cos(t),
-                radius * cos(k * t) * sin(t),
-                0
-            ] for t in theta
+            [radius * cos(k * t) * cos(t),
+             radius * cos(k * t) * sin(t),
+             0] for t in theta
         ]
         self.set_points_smoothly(pts)
 
