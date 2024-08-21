@@ -1,5 +1,4 @@
 from manim import *
-from pyglet.libs.x11.xlib import FocusOut
 """
 Uncomment the next 4 lines for vertical resolution.
 """
@@ -30,17 +29,19 @@ class AnimationTypes(ToadScene):
         self._config(grid=True, screen_border=False)
         self.add(Square(stroke_opacity=0.1, stroke_width=3, side_length=4))
         # ---------------------------------------------------------------------
-        s = Square(color=GREEN, stroke_opacity=1, stroke_width=4, fill_opacity=0.3, side_length=4)
-        c = Circle().shift(LEFT*2)
-        dot = Dot(stroke_width=15)
-        grp = VGroup(s, c)
         txt = Text('This is some test string!!!').shift(DOWN*4)
+        s = Square(color=GREEN, stroke_opacity=1, stroke_width=4, fill_opacity=0.3, side_length=4)
+        c = Circle(stroke_opacity=1, stroke_width=20).shift(LEFT*2)
+        t = Triangle()
+        grp = VGroup(s, c)
+        dot = Dot(stroke_width=15)
         arrow = Arrow()
-        
+
+        self.add(txt)
         self.add(s)
         self.add(c)
+        self.add(c)
         # self.add(dot)
-        self.add(txt)
         # self.add(arrow)
         self.wait(0.25)
         """
@@ -88,6 +89,7 @@ class AnimationTypes(ToadScene):
         # self.play(CounterclockwiseTransform(s, c))
         # self.play(ReplacementTransform(s, c))
         # self.play(Rotate(s))
+        # self.play(Rotate(s, angle=TAU, about_point=ORIGIN), run_time=4, rate_func=linear)
         # self.play(Rotating(s))
         # self.play(ScaleInPlace(s, scale_factor=2))
         # self.play(ShrinkToCenter(c))
@@ -97,9 +99,9 @@ class AnimationTypes(ToadScene):
         # self.play(TracedPath(s))
         # self.play(GrowArrow(arrow))
         # self.play(MoveAlongPath(dot, s)); self.play(FadeOut(dot))
-        # self.play(ChangeSpeed())    # ???
-        # self.play(CyclicReplace())  # ???
-        # self.play(Restore())        # ???
+        # self.play(ChangeSpeed())              # ???
+        # self.play(CyclicReplace())            # ???
+        # self.play(Restore())                  # ???
         # self.play(TransformMatchingShapes())  # ???
         # self.play(TransformMatchingTex())     # ???
         """
@@ -109,8 +111,54 @@ class AnimationTypes(ToadScene):
         # self.wait(0.5)
         # self.play(ShowIncreasingSubsets(grp))
         # self.play(ShowSubmobjectsOneByOne(grp))
+        """
+        Mobject.animate.________()
+        """
+        self.play(s.animate.shift(RIGHT))
+        # self.play(s.animate.set_fill(color=BLUE, opacity=0.75))
+        # self.play(s.animate.rotate(PI/3))  # This rotation method scales the object down mid-rotation for effect.
+        # self.play(s.animate.scale(2))
+        # self.play(t.animate.flip())
+        # self.play(t.animate.flip(RIGHT))
+        # self.play(s.animate.stretch(factor=2, dim=0))  # dim = 0 (x-axis), 1 (y-axis), 2 (z-axis)
+        # self.play(s.animate.pose_at_angle())
+        # self.play(s.animate.center())
+        # self.play(s.animate.align_on_border(UP))
+        # self.play(s.animate.align_on_border(DL, buff=0))  # `animate.to_edge()` , `animate.align_on_border()`, and `animate.to_corner()` all do the same thing.
+        # self.play(s.animate.to_corner(UP))
+        # self.play(s.animate.to_corner(DL, buff=0))
+        # self.play(s.animate.to_edge(UP))
+        # self.play(s.animate.to_edge(DL, buff=0))
+        # self.play(s.animate.next_to(c, DOWN, buff=1))
+        # self.play(s.animate.scale_to_fit_width(3))
+        # self.play(s.animate.stretch_to_fit_width(5))
+        # self.play(s.animate.stretch_to_fit_height(2))
+        # self.play(s.animate.scale_to_fit_height(6))
+        # self.play(s.animate.set_coord(value=3, dim=1))  # dim = 0 (x-axis), 1 (y-axis), 2 (z-axis)
+        # self.play(s.animate.set_x(3))
+        # self.play(s.animate.set_y(1))
+        # self.play(grp.animate.space_out_submobjects())
+        # self.play(s.animate.replace(c))
+        # self.play(s.animate.surround(c))
+        # self.play(c.animate.replace(s))
+        # self.play(c.animate.surround(s))
+        # self.play(s.animate.add_background_rectangle(color=PURPLE))
+        # self.play(s.animate.set_color(color=BLUE))
+        # self.play(s.animate.set_color_by_gradient([BLUE, WHITE]))
+        # self.play(s.animate.fade())
+        # self.play(s.animate.fade_to(color=WHITE, alpha=0.5))
+        # self.play(s.animate.match_color(c))
+        # self.play(s.animate.match_dim_size(c, dim=0))  # dim = 0 (x-axis), 1 (y-axis), 2 (z-axis)
+        # self.play(s.animate.match_width(c))
+        # self.play(s.animate.match_height(c))
+        # self.play(s.animate.match_x(c))
+        # self.play(s.animate.match_y(c))
+        # self.play(grp.animate.arrange())
+        # self.play(grp.animate.arrange_in_grid())
+        # self.play(s.animate.become(c))
+        # self.play(s.animate.match_points(c))
 
-        self.wait()
+        self.wait(2)
 
     def _config(self, bg_color='#131313', grid=True, screen_border=False):
         self.camera.background_color = bg_color
