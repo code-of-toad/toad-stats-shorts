@@ -3,59 +3,20 @@ from math import cos, sin
 """
 Uncomment the next 4 lines for vertical resolution.
 """
-# config.pixel_width  = 1080
-# config.pixel_height = 1920
-# config.frame_width  = 9.0
-# config.frame_height = 16.0
-
-
-class RosePattern(VMobject):
-    _radius: float
-    _k:      float
-    def __init__(self, radius=2, k=3, **kwargs):
-        super().__init__(**kwargs)
-        self._radius = radius
-        self._k      = k
-        step_s = 0.05
-        theta_domain = np.arange(0, TAU + step_s, step_s)
-        pts = [
-            [radius * cos(k * theta) * cos(theta),  # x-coord
-             radius * cos(k * theta) * sin(theta),  # y-coord
-             0  # z-coord
-            ] for theta in theta_domain
-        ]
-        self.set_points_smoothly(pts)
-
-
-class RosePatternWithParamFunc(ParametricFunction):
-    _radius: float
-    _k:      float
-    def __init__(self, radius=2, k=10, **kwargs):
-        self._radius = radius
-        self._k      = k
-        step_s = 0.05
-        super().__init__(
-            function=lambda theta: [
-                radius * cos(k * theta) * cos(theta),
-                radius * cos(k * theta) * sin(theta),
-                0
-            ],
-            t_range=(0, TAU + step_s, step_s),
-            **kwargs
-        )
+config.pixel_width  = 1080
+config.pixel_height = 1920
+config.frame_width  = 9.0
+config.frame_height = 16.0
 
 
 class ToadScene(Scene):
     def play(self, *args, **kwargs):
-        kwargs = self._override_defaults(**kwargs)
-        super().play(*args, **kwargs)
-    def _override_defaults(self, **kwargs):
         defaults = {
             'run_time': 0.5,
         }
         for k, v in defaults.items():
             kwargs.setdefault(k, v)
-        return kwargs
+        super().play(*args, **kwargs)
 
 
 class LineBasics(ToadScene):
@@ -89,7 +50,6 @@ class LineBasics(ToadScene):
             tip_height=0.2,
         )
         self.play(Create(x_axis))
-
         """
         Now, suppose that you want to place a dot on the number line at x = -3.
         How can you (or, rather, SHOULD you) do that?
@@ -102,9 +62,10 @@ class LineBasics(ToadScene):
         dot_green = Dot(color=GREEN, point=x_axis.n2p(-3), stroke_width=8)
         dot_red =   Dot(color=RED,   point=[-3, 0, 0],     stroke_width=8)
         # dot_blue =  Dot(color=BLUE,  point=x_axis.p2n([-3, 0, 0]), stroke_width=8)  # ???
-        self.add(dot_green, dot_red)
+        self.play(Create(dot_green), Create(dot_red))
 
         self.wait(2)
+
 
     def _config(self, bg_color='#131313', grid=True, screen_border=False):
         self.camera.background_color = bg_color
