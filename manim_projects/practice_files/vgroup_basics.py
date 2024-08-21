@@ -9,42 +9,6 @@ config.frame_width  = 9.0
 config.frame_height = 16.0
 
 
-class RosePattern(VMobject):
-    _radius: float
-    _k:      float
-    def __init__(self, radius=2, k=3, **kwargs):
-        super().__init__(**kwargs)
-        self._radius = radius
-        self._k      = k
-        step_s = 0.05
-        theta_domain = np.arange(0, TAU + step_s, step_s)
-        pts = [
-            [radius * cos(k * theta) * cos(theta),  # x-coord
-             radius * cos(k * theta) * sin(theta),  # y-coord
-             0  # z-coord
-            ] for theta in theta_domain
-        ]
-        self.set_points_smoothly(pts)
-
-
-class RosePatternWithParamFunc(ParametricFunction):
-    _radius: float
-    _k:      float
-    def __init__(self, radius=2, k=10, **kwargs):
-        self._radius = radius
-        self._k      = k
-        step_s = 0.05
-        super().__init__(
-            function=lambda theta: [
-                radius * cos(k * theta) * cos(theta),
-                radius * cos(k * theta) * sin(theta),
-                0
-            ],
-            t_range=(0, TAU + step_s, step_s),
-            **kwargs
-        )
-
-
 class ToadScene(Scene):
     def play(self, *args, **kwargs):
         kwargs = self._override_defaults(**kwargs)
@@ -58,7 +22,7 @@ class ToadScene(Scene):
         return kwargs
 
 
-class Idk(ToadScene):
+class VGroupBasics(ToadScene):
     def construct(self):
         # ------------------------------ CONFIG -------------------------------
         self._config(grid=True, screen_border=False)#, bg_color=BLACK)
