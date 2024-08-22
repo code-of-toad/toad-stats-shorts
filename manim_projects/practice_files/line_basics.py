@@ -39,6 +39,7 @@ class LineBasics(ToadScene):
 
             include_numbers=True,
             numbers_to_exclude=[0],
+            # numbers_to_include=[0],
             # numbers_with_elongated_ticks=[n for n in range(-6, 7, 2)],
             label_direction=DOWN,
             font_size=22,
