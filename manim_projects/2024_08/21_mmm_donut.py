@@ -34,7 +34,7 @@ class ToadScene(Scene):
 
 class MmmDonut(ThreeDScene):
     def construct(self):
-        self.camera.background_color = '#131313'
+        # self.camera.background_color = '#131313'
         # Set up the camera orientation with a slightly higher angle
         self.set_camera_orientation(phi=50 * DEGREES, theta=-45 * DEGREES)
 
@@ -85,13 +85,13 @@ class MmmDonut(ThreeDScene):
 
         # Rotate the camera around the torus
         self.begin_ambient_camera_rotation(rate=PI/10)  # Rotates the camera continuously
-        self.wait(10)  # Duration of the rotation
+        self.wait(17)  # Duration of the rotation
 
         # Stop the camera rotation
         self.stop_ambient_camera_rotation()
 
         # Hold the final frame for a bit
-        self.wait(2)
+        # self.wait(2)
 
 
     # def construct2(self):
